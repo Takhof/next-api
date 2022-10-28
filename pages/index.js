@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-function ComponentsPage() {
+function CommentsPage() {
   const fetchComments = async () => {
     try {
       const res = await axios.get("/api/comments");
@@ -11,10 +11,23 @@ function ComponentsPage() {
     }
   };
 
+  const postComment = async () => {
+    const res = await axios.post("/api/comments", { comment: comment });
+    const data = await res.data;
+    console.log(data);
+  };
+
   const [comments, setComments] = useState([]);
+  const [comment, setComment] = useState("");
 
   return (
     <>
+      <input
+        type="text"
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
+      />
+      <button onClick={postComment}>Submit Comment</button>
       <button onClick={fetchComments}>Load comments</button>
       {comments.map((comment) => {
         return (
@@ -27,4 +40,4 @@ function ComponentsPage() {
   );
 }
 
-export default ComponentsPage;
+export default CommentsPage;
