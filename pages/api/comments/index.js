@@ -5,11 +5,11 @@ export default function handler(req, res) {
     res.status(200).json(comments);
   } else {
     if (req.method === "POST") {
-      console.log(req);
       const comment = req.body.comment;
 
       const newComment = {
-        id: Date.now(),
+        id: comments.length + 1,
+        time: Date.now(),
         text: comment,
       };
       comments.push(newComment);

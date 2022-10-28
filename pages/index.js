@@ -14,6 +14,15 @@ function CommentsPage() {
   const postComment = async () => {
     const res = await axios.post("/api/comments", { comment: comment });
     const data = await res.data;
+    console.log(data);
+    fetchComments();
+  };
+
+  const deleteComment = async (id) => {
+    const res = await axios.delete(`/api/comments/${id}`);
+    const data = await res.data;
+    console.log(data);
+    fetchComments();
   };
 
   const [comments, setComments] = useState([]);
@@ -32,6 +41,9 @@ function CommentsPage() {
         return (
           <div key={comment.id}>
             {comment.id} {comment.text}
+            <button onClick={() => deleteComment(comment.id)}>
+              DELETE THIS COMMENT
+            </button>
           </div>
         );
       })}
