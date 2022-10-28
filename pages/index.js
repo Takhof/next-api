@@ -14,7 +14,6 @@ function CommentsPage() {
   const postComment = async () => {
     const res = await axios.post("/api/comments", { comment: comment });
     const data = await res.data;
-    console.log(data);
   };
 
   const [comments, setComments] = useState([]);
